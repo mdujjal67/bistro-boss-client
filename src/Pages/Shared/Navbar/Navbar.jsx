@@ -2,16 +2,16 @@
 const Navbar = () => {
 
     const navOptions = <>
-        <li><a>HOME</a></li>
-        <li><a>CONTACT US</a></li>
-        <li><a>DASHBOARD</a></li>
-        <li><a>OUR MENU</a></li>
-        <li><a>OUR SHOP</a></li>
+        <li className="font-semibold hover:text-yellow-400"><a>HOME</a></li>
+        <li className="font-semibold hover:text-yellow-400"><a>CONTACT US</a></li>
+        <li className="font-semibold hover:text-yellow-400"><a>DASHBOARD</a></li>
+        <li className="font-semibold hover:text-yellow-400"><a>OUR MENU</a></li>
+        <li className="font-semibold hover:text-yellow-400"><a>OUR SHOP</a></li>
     </>
 
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar fixed z-10 bg-black bg-opacity-40 text-white max-w-screen-xl">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
