@@ -1,8 +1,17 @@
 import PropType from "prop-types"
-const CoverContent = ({img, title, content}) => {
+import { Parallax } from 'react-parallax';
+
+const CoverContent = ({ img, title, content }) => {
     return (
         <div>
-            <div className="hero h-[700px]" style={{ backgroundImage: `url("${img}")` }}>
+            <Parallax
+                blur={{ min: -15, max: 15 }}
+                bgImage={img}
+                bgImageAlt="the menu"
+                strength={-200}
+                style={{ height: '700px' , backgroundSize: 'cover' , marginBottom: '100px'}}>
+
+                <div className="hero h-[700px]  ">
                 <div className=" bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content bg-[#15151599] py-[130px] px-[300px]">
                     <div className="max-w-md ">
@@ -11,11 +20,13 @@ const CoverContent = ({img, title, content}) => {
                     </div>
                 </div>
             </div>
+            </Parallax>
+            
         </div>
     );
 };
 
-CoverContent.propTypes ={
+CoverContent.propTypes = {
     img: PropType.object,
     title: PropType.object,
     content: PropType.object
