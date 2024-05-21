@@ -27,6 +27,10 @@ const PopularMenu = () => {
                     ></MenuItem>)
                 }
             </div>
+            <div className="mx-auto text-center">
+            <button className="btn btn-outline mt-12 font-semibold border-gray-800  text-gray-900 border-0 border-b-2  ">Read More</button>
+            </div>
+
         </section>
     );
 };
