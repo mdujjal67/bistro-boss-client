@@ -1,0 +1,11 @@
+.featured-item{
+    background: linear-gradient(-90deg, #272728 0%, rgba(7, 2, 17, 0.00) 130%), url('../../../assets/home/featured.jpg');
+    background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* height: 600px; */
+}
+.menu-heading {
+    color: white;
+}

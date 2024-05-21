@@ -25,8 +25,21 @@ const Category = () => {
             >
             </SectionTitle>
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
+                breakpoints={{
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    }
+                }}
+                // spaceBetween={30}
                 centeredSlides={true}
                 pagination={{
                     clickable: true,
@@ -35,23 +48,23 @@ const Category = () => {
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <img src={slide1} alt="" className='w-[400px]'/>
+                    <img src={slide1} alt="" className='w-[400px] mx-auto'/>
                     <h3 className='text-3xl text-white uppercase text-center -mt-24 mb-10'>salads</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slide2} alt="" className='w-[400px]'/>
+                    <img src={slide2} alt="" className='w-[400px] mx-auto'/>
                     <h3 className='text-3xl text-white uppercase text-center -mt-24 mb-10'>pizzas</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slide3} alt="" className='w-[400px]'/>
+                    <img src={slide3} alt="" className='w-[400px] mx-auto'/>
                     <h3 className='text-3xl text-white uppercase text-center -mt-24 mb-10'>soups</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slide4} alt="" className='w-[400px]'/>
+                    <img src={slide4} alt="" className='w-[400px] mx-auto'/>
                     <h3 className='text-3xl text-white uppercase text-center -mt-24 mb-10'>deserts</h3>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slide5} alt="" className='w-[400px]'/>
+                    <img src={slide5} alt="" className='w-[400px] mx-auto'/>
                     <h3 className='text-3xl text-white uppercase text-center -mt-24 mb-10'>salads</h3>
                 </SwiperSlide>
             </Swiper>

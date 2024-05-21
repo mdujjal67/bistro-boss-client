@@ -2,11 +2,11 @@
 const Navbar = () => {
 
     const navOptions = <>
-        <li className="font-semibold hover:text-yellow-400"><a>HOME</a></li>
-        <li className="font-semibold hover:text-yellow-400"><a>CONTACT US</a></li>
-        <li className="font-semibold hover:text-yellow-400"><a>DASHBOARD</a></li>
-        <li className="font-semibold hover:text-yellow-400"><a>OUR MENU</a></li>
-        <li className="font-semibold hover:text-yellow-400"><a>OUR SHOP</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>HOME</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>CONTACT US</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>DASHBOARD</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>OUR MENU</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>OUR SHOP</a></li>
     </>
 
     return (

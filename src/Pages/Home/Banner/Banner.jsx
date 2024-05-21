@@ -10,22 +10,22 @@ const Banner = () => {
     return (
         <div className="pb-[100px]">
             <Carousel className="mx-auto" autoPlay="true" interval="3000" infiniteLoop="true" useKeyboardArrows="true">
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img1} />
                 </div>
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img2} />
                 </div>
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img3} />
                 </div>
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img4} />
                 </div>
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img5} />
                 </div>
-                <div className="h-[600px]">
+                <div className="lg:h-[600px]">
                     <img src={img6} />
                 </div>
             </Carousel>
