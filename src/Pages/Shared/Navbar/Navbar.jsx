@@ -1,12 +1,13 @@
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
     const navOptions = <>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>HOME</a></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>CONTACT US</a></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>DASHBOARD</a></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>OUR MENU</a></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><a>OUR SHOP</a></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/">HOME</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/home">CONTACT US</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/home">DASHBOARD</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/menu">OUR MENU</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/home">OUR SHOP</NavLink></li>
     </>
 
     return (
