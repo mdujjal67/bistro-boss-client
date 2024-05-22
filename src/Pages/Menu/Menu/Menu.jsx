@@ -10,9 +10,10 @@ import useMenu from "../../../Hooks/useMenu";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import MenuCategory from "../MenuCategory/MenuCategory";
 
+
 const Menu = () => {
 
-    const [menu] = useMenu();
+    const [menu] = useMenu()
     const desserts = menu.filter(item => item.category === 'dessert');
     const soup = menu.filter(item => item.category === 'soup');
     const salad = menu.filter(item => item.category === 'salad');
@@ -38,16 +39,16 @@ const Menu = () => {
             <MenuCategory item={offered}></MenuCategory>
 
             {/* desserts menu items */}
-            <MenuCategory item={desserts} title="Desserts" img={dessertImg}></MenuCategory>
+            <MenuCategory item={desserts} title="desserts" img={dessertImg}></MenuCategory>
 
             {/* pizzas menu items */}
-            <MenuCategory item={pizza} title="Pizza" img={pizzaImg}></MenuCategory>
+            <MenuCategory item={pizza} title="pizza" img={pizzaImg}></MenuCategory>
 
             {/* salads menu items */}
-            <MenuCategory item={salad} title="Salads" img={saladImg}></MenuCategory>
+            <MenuCategory item={salad} title="salads" img={saladImg}></MenuCategory>
 
             {/* soups menu items */}
-            <MenuCategory item={soup} title="Soups" img={soupImg}></MenuCategory>
+            <MenuCategory item={soup} title="soups" img={soupImg}></MenuCategory>
         </div>
     );
 };

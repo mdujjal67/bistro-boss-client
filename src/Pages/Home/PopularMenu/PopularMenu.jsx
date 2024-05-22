@@ -2,6 +2,7 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 import useMenu from "../../../Hooks/useMenu";
+import { Link } from "react-router-dom";
 
 const PopularMenu = () => {
     const [menu] = useMenu();
@@ -31,7 +32,9 @@ const PopularMenu = () => {
                 }
             </div>
             <div className="mx-auto text-center">
-                <button className="btn btn-outline mt-12 font-semibold border-gray-800  text-gray-900 border-0 border-b-2  ">Read More</button>
+                <Link to="/menu">
+                    <button className="btn btn-outline mt-12 font-semibold border-gray-800  text-gray-900 border-0 border-b-2  ">View Full Menu</button>
+                </Link>
             </div>
 
         </section>
