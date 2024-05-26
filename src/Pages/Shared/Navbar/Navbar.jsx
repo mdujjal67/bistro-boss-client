@@ -4,10 +4,11 @@ const Navbar = () => {
 
     const navOptions = <>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/">HOME</NavLink></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700 mx-2"><NavLink to="/home">CONTACT US</NavLink></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/home">DASHBOARD</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700 mx-2"><NavLink to="/">CONTACT US</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/">DASHBOARD</NavLink></li>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700 mx-2"><NavLink to="/menu">OUR MENU</NavLink></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/order/salad">OUR SHOP</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/order/salads">OUR SHOP</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/login">LOGIN</NavLink></li>
     </>
 
     return (
