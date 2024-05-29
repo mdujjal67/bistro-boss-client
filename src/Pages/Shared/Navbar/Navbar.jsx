@@ -1,6 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+
+            })
+            .catch(error => { console.log(error) })
+    }
 
     const navOptions = <>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/">HOME</NavLink></li>
@@ -8,7 +21,28 @@ const Navbar = () => {
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/">DASHBOARD</NavLink></li>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700 mx-2"><NavLink to="/menu">OUR MENU</NavLink></li>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/order/salads">OUR SHOP</NavLink></li>
-        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/login">LOGIN</NavLink></li>
+        <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/secret">OUR SECRET</NavLink></li>
+        <li>
+            <Link to='/'>
+                <button className="btn btn-sm mr-3">
+                    <FaShoppingCart />
+                    <div className="badge badge-secondary">+0</div>
+                </button>
+            </Link>
+        </li>
+
+
+        {
+            user ?
+                <>
+                    <span className="mt-2">{user.email}</span>
+                    <button onClick={handleLogOut} className="btn btn-ghost font-semibold hover:text-yellow-400 lg:text-white text-gray-700 -mt-[5px]">LOG OUT</button>
+                </> :
+                <>
+                    <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700 -mt-[5px]"><NavLink to="/login">LOGIN</NavLink></li>
+                </>
+        }
+
     </>
 
     return (
@@ -31,7 +65,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <a className="btn btn-sm">Button</a>
                 </div>
             </div>
         </div>

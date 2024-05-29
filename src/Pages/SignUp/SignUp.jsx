@@ -1,35 +1,57 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext} from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from "react-simple-captcha";
+import { Link, useNavigate } from "react-router-dom";
+// import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from "react-simple-captcha";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
     // react hook form
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const {createUser, updateUserProfile} = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const onSubmit = (data) => {
         console.log(data);
+        createUser(data.email, data.password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            updateUserProfile(data.name, data.photoURL)
+            .then(() => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "User created successfully!",
+                    icon: "success"
+                  });
+                  reset();
+                  navigate('/');
+            })
+            .catch(error => console.log(error))   
+        })
     };
 
 
-    // captcha related functions
-    const [disabled, setDisabled] = useState(true)
-    const captchaRef = useRef(null);
 
-    // load captcha auto after click load-captcha
-    useEffect(() => {
-        loadCaptchaEnginge(6);
-    }, []);
+    // // captcha related functions
+    // const [disabled, setDisabled] = useState(true)
+    // const captchaRef = useRef(null);
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
-        if (validateCaptcha(user_captcha_value)) {
-            setDisabled(false);
-        }
-        else {
-            alert('Captcha Does Not Match');
-        }
-    };
+    // // load captcha auto after click load-captcha
+    // useEffect(() => {
+    //     loadCaptchaEnginge(6);
+    // }, []);
+
+    // const handleValidateCaptcha = () => {
+    //     const user_captcha_value = captchaRef.current.value;
+    //     if (validateCaptcha(user_captcha_value)) {
+    //         setDisabled(false);
+    //     }
+    //     else {
+    //         alert('Captcha Does Not Match');
+    //     }
+    // };
 
 
     return (
@@ -47,33 +69,41 @@ const SignUp = () => {
                                     <span className="label-text">Name</span>
                                 </label>
                                 <input {...register("name", { required: true })} type="text" name="name" placeholder="name" className="input input-bordered"  />
-                                {errors.name && <span className="text-red-500">This field is required</span>}
+                                {errors.name && <span className="text-red-500">name is required</span>}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input {...register("photoURL", { required: true })} type="text" name="photoURL" placeholder="photo URL" className="input input-bordered"  />
+                                {errors.photoURL && <span className="text-red-500">photo URL is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input {...register("email", { required: true })} type="email" name="email" placeholder="email" className="input input-bordered" required />
-                                {errors.email && <span className="text-red-500">This field is required</span>}
+                                <input {...register("email", { required: true })} type="email" name="email" placeholder="email" className="input input-bordered"  />
+                                {errors.email && <span className="text-red-500">email is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Create Password</span>
                                 </label>
-                                <input {...register("password", { required: true })} type="password" name="password" placeholder="password" className="input input-bordered" required />
-                                {errors.password && <span className="text-red-500">This field is required</span>}
+                                <input {...register("password", { required: true, pattern: /(?=.*[a-z])(?=.*[A-Z]).{6,}/ })} type="password" name="password" placeholder="password" className="input input-bordered"  />
+                                {errors.password?.type === "required" && <span className="text-red-500">password is required</span>}
+                                {errors.password?.type === "pattern" && <span className="text-red-500 text-[12px] mt-2">Password must be at least 6 characters long and contain at least one uppercase letter and one lowercase letter</span>}
                             </div>
                             {/* for captcha validation */}
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input ref={captchaRef} type="text" name="captcha" placeholder="Type captcha" className="input input-bordered" required />
                                 <button onClick={handleValidateCaptcha} className="btn btn-outline btn-sm mt-2">Validate</button>
-                            </div>
+                            </div> */}
 
                             <div className="form-control mt-6">
-                                <input disabled={disabled} type="submit" className="btn btn-primary text-white" value="Login" />
+                                <input  type="submit" className="btn btn-primary text-white" value="Sign Up" />
                             </div>
                         </form>
                         <div className="flex items-center pt-4 space-x-1">

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
 
@@ -23,18 +23,26 @@ const AuthProvider = ({ children }) => {
     };
 
 
-    // signIn function
+    // signIn user function
     const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     };
 
 
-    // logout function
+    // logout user function
     const logOut = () => {
         setLoading(true)
         return signOut(auth)
     };
+
+
+    // update user function
+    const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
 
 
     // google sign-in
@@ -47,7 +55,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser =>{
             setUser(currentUser);
-            console.log('Current User:' ,currentUser);
+            // console.log('Current User:' ,currentUser);
             setLoading(false);
         });
         return () => {
@@ -64,6 +72,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         googleLogin,
+        updateUserProfile,
     }
 
     return (
