@@ -24,9 +24,11 @@ const Login = () => {
                 console.log(user);
 
                 Swal.fire({
-                    title: "Logged In!",
-                    text: "User logged In successfully!",
-                    icon: "success"
+                    position: "center",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 2000
                   });
                   
                   navigate(from, {replace: true});
@@ -65,7 +67,13 @@ const Login = () => {
         googleLogin()
             .then(result => {
                 console.log(result.user)
-                alert('Login Successful!');
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
                 navigate(location?.state ? location?.state : '/')
             })
     }
