@@ -25,7 +25,7 @@ const Navbar = () => {
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/order/salads">OUR SHOP</NavLink></li>
         <li className="font-semibold hover:text-yellow-400 lg:text-white text-gray-700"><NavLink to="/secret">OUR SECRET</NavLink></li>
         <li>
-            <Link to='/'>
+            <Link to='/dashboard/cart'>
                 <button className="btn btn-sm mr-3">
                     <FaShoppingCart  className="text-xl"/>
                     <div className="badge badge-secondary">+{cart.length}</div>
