@@ -1,11 +1,37 @@
-import { FaTrashAlt } from "react-icons/fa";
-import useCart from "../../../Hooks/useCart";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { FaTrashAlt, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
-import axios from "axios";
 
-const Cart = () => {
-    const [cart, refetch] = useCart();
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
+const AllUsers = () => {
+    const axiosSecure = useAxiosSecure();
+
+    const {refetch, data: users = []} = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users')
+            return res.data
+        }
+    });
+
+
+    const handleMakeAdmin = user => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        })
+
+
+    }
+
+
     const handleDelete = (id) => {
 
         Swal.fire({
@@ -16,20 +42,23 @@ const Cart = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+        })
+        .then((result) => {
             if (result.isConfirmed) {
                 // Swal.fire({
                 //     title: "Deleted!",
                 //     text: "Your file has been deleted.",
                 //     icon: "success"
                 // });
-                axios.delete(`http://localhost:5000/carts/${id}`)
+                axiosSecure.delete(`/users/${id}`)
                     .then(res => {
+                        
                         if (res.data.deletedCount > 0) {
+                            console.log(res)
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Item has been deleted.",
+                                text: "User has been deleted.",
                                 icon: "success"
                             });
                         }
@@ -37,28 +66,29 @@ const Cart = () => {
             }
         });
     }
+
+
     return (
         <div>
-            <div className="flex justify-evenly py-5">
-                <h2 className="text-3xl">Total Orders: {cart.length}</h2>
-                <h2 className="text-3xl">Total Price: ${totalPrice}</h2>
-                <button className="btn btn-primary btn-sm">Pay</button>
+            <div className="flex justify-evenly my-4">
+                <h3 className="text-3xl ">All Users {users.length}</h3>
+                <h3 className="text-3xl ">Total Users</h3>
             </div>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead className="bg-base-200">
                         <tr>
-                            <th>#</th>
-                            <th>Item Image</th>
-                            <th>Item Name</th>
-                            <th>Price</th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            cart.map((item, index) => <tr key={item._id}>
+                            users.map((item, index) => <tr key={item._id}>
                                 <th>
                                     {index + 1}
                                 </th>
@@ -72,10 +102,14 @@ const Cart = () => {
                                     </div>
                                 </td>
                                 <td>{item.name}</td>
-                                <td>{item.price}</td>
+                                <td>
+                                    <button onClick={handleMakeAdmin} className="btn btn-ghost btn-sm  bg-orange-500">
+                                        <FaUsers className="text-white text-lg"></FaUsers>
+                                    </button>
+                                </td>
                                 <th>
-                                    <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-sm">
-                                        <FaTrashAlt className="text-red-500"></FaTrashAlt>
+                                    <button  onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-sm bg-red-500">
+                                        <FaTrashAlt className="text-white"></FaTrashAlt>
                                     </button>
                                 </th>
                             </tr>)
@@ -87,4 +121,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default AllUsers;
