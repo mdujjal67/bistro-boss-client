@@ -17,22 +17,27 @@ const AllUsers = () => {
 
 
     const handleMakeAdmin = user => {
-
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+        axiosSecure.patch(`/users/admin/${user._id}`)
+        .then(res => {
+            console.log(res.data)
+            if(res.data.modifiedCount > 0){
+                refetch();
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: `${user.name} is an Admin Now!`,
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            }
         })
+
 
 
     }
 
 
-    const handleDelete = (id) => {
+    const handleDelete = user => {
 
         Swal.fire({
             title: "Are you sure?",
@@ -50,7 +55,7 @@ const AllUsers = () => {
                 //     text: "Your file has been deleted.",
                 //     icon: "success"
                 // });
-                axiosSecure.delete(`/users/${id}`)
+                axiosSecure.delete(`/users/${user._id}`)
                     .then(res => {
                         
                         if (res.data.deletedCount > 0) {
@@ -88,7 +93,7 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((item, index) => <tr key={item._id}>
+                            users.map((user, index) => <tr key={user._id}>
                                 <th>
                                     {index + 1}
                                 </th>
@@ -96,19 +101,19 @@ const AllUsers = () => {
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle w-12 h-12">
-                                                <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                <img src={user.image} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{item.name}</td>
+                                <td>{user.name}</td>
                                 <td>
-                                    <button onClick={handleMakeAdmin} className="btn btn-ghost btn-sm  bg-orange-500">
+                                    { user.role === 'admin' ? 'Admin' : <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost btn-sm  bg-orange-500">
                                         <FaUsers className="text-white text-lg"></FaUsers>
-                                    </button>
+                                    </button> }
                                 </td>
                                 <th>
-                                    <button  onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-sm bg-red-500">
+                                    <button  onClick={() => handleDelete(user)} className="btn btn-ghost btn-sm bg-red-500">
                                         <FaTrashAlt className="text-white"></FaTrashAlt>
                                     </button>
                                 </th>
